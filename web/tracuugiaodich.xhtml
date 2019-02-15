@@ -1,0 +1,124 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/default/main.xhtml">
+    <ui:define name="content">     
+
+        <div  class="row col-lg-12" >
+            <h:form>
+                <div class="form-group">
+                    <p:messages id="messages" showSummary="false" showDetail="true" autoUpdate="true" closable="true" />
+                </div>
+  
+                <div class="form-group well well-sm">
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Đối tác:</span>
+                            <h:selectOneMenu  class="dropdown form-control " id="doitac" disabled="#{hoibaoManagedBean.dischondoitac}" value="#{hoibaoManagedBean.iddoitac}" required="true" requiredMessage="Vui lòng chọn trạng thái hồi báo" >                     
+                                <f:selectItem itemValue="85683" itemLabel="SAIGON CENTRAL POST" />
+                                <f:selectItem itemValue="11475" itemLabel="RIA" />
+                                <f:selectItem itemValue="42689" itemLabel="MONEYGRAM" />
+                                <f:selectItem itemValue="20066" itemLabel="ANHMINH" />
+                                <f:selectItem itemValue="69402" itemLabel="LE VA KHANG" />
+                                
+                            </h:selectOneMenu>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1">Mã người nhận/Case Id:</span>
+                            <h:inputText class="form-control " id="mann" value="#{hoibaoManagedBean.manguoinhan}" required="true" requiredMessage="Vui lòng nhập mã người nhận" onkeyup="this.value = this.value.toUpperCase();"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <h:commandLink action="#{hoibaoManagedBean.timtheomanguoinhan()}"
+                                       class="btn-primary btn-sm "
+                                       styleClass="btn btn-default "
+                                       >
+                            <i class="glyphicon glyphicon-search"></i>
+                            Tìm kiếm
+
+                        </h:commandLink>
+                    </div>
+
+                </div>                
+            </h:form>
+        </div>
+
+        <div class="row col-lg-12">
+            <h:form>
+                <div class="well well-sm">
+                    <h:panelGrid columns="2" border="1">
+                        <h:outputLabel value="Mã người nhận/Case Id"  />
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.manguoinhan}"/>
+                        <h:outputLabel value="Trạng thái giao dịch/Status"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.dachitradetail} " style="color: #{(hoibaoManagedBean.vwKieuhoiListDetail.dachitra)=='Y'?'blue':'red'}"/>
+                        <h:outputLabel value="Ngày nhập liệu/Order Date"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.ngaynhaplieu}"/>
+                        <h:outputLabel value="Ngày chi trả/Close Date"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.ngaychitra}"/>
+                        <h:outputLabel value="Ngày hồi báo/Return Date"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.ngayhoibao}"/>
+                        <h:outputLabel value="Dịch vụ/Payment Service"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.diadiemchitradetail}"/>
+                        <h:outputLabel value="Người gởi/Sender"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.nguoigoi}"/>
+                        <h:outputLabel value="Người nhận/Primary Receiver"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.hoten}"/>
+                        <h:outputLabel value="Địa chỉ/Address"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.diachi}"/>
+                        <h:outputLabel value="Số giấy tờ/Id Number"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.socttuythan}"/>
+                        <h:outputLabel value="Số điện thoại/Phone"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.dienthoai}"/>
+                        <h:outputLabel value="Số tiền gởi/Amount"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.sotiengoi} #{hoibaoManagedBean.vwKieuhoiListDetail.idloaitiengoi}"/>
+                        <h:outputLabel value="Tin nhắn/Message"/>
+                        <h:outputLabel value="#{hoibaoManagedBean.vwKieuhoiListDetail.ghichugoi}"/>                        
+                        <h:outputLabel value="Hình biên nhận/Image"/>
+                        <p:commandLink  ajax="true"  disabled="#{hoibaoManagedBean.vwKieuhoiListDetail.disimage}" action="#{hoibaoManagedBean.chuyentrangdownload()}">
+                            <h:graphicImage name="/images/#{hoibaoManagedBean.vwKieuhoiListDetail.duongdanimage}" width="30" height="30"/>
+                        </p:commandLink>
+                    </h:panelGrid>
+
+                </div>
+            </h:form>
+
+
+        </div>
+
+        <div class="row col-lg-12">
+            <h:form>
+                <div class="form-group well well-sm">
+
+                    <h:dataTable class="table table-bordered" id="showdata" value="#{hoibaoManagedBean.vwLichsuGdListWebs}" var="item">
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ngày/Date"/>
+                            </f:facet>
+                            <h:outputText value="#{item.chargio}">
+                               
+                            </h:outputText>
+                            
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Lý do xác minh / Internal Log"/>
+                            </f:facet>
+                            #{item.lydo}
+                        </p:column>
+
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition> 
+

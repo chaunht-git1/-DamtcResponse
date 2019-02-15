@@ -1,0 +1,87 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/default/main.xhtml">
+    <ui:define name="content">     
+        <div class="row col-lg-12 well well-sm">
+            <h:form id="formhb">
+                <div class="form-group">
+                    <p:dataTable id="showdata" binding="#{table}" value="#{hoibaoManagedBean.vwKieuhoiListDetails}" var="item" paginator="true"    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rows="10">
+
+                        <h:column   >
+                            <f:facet name="header">
+                                <h:outputText value="Stt"/>
+                            </f:facet>
+                            <h:outputText value="#{table.rowIndex+1}" />
+                        </h:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tên người nhận"/>
+                            </f:facet>
+                            #{item.hoten}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Tên người gởi"/>
+                            </f:facet>
+                            #{item.nguoigoi}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Mã người nhận"/>
+                            </f:facet>
+                            #{item.manguoinhan}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đại lý"/>
+                            </f:facet>
+                            #{item.agent}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Số tiền"/>
+                            </f:facet>
+                            #{item.sotiengoi}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Loại tiền"/>
+                            </f:facet>
+                            #{item.idloaitiengoi}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ngày nhận file"/>
+                            </f:facet>
+                            #{item.ngaynhaplieu}
+                        </p:column>
+                        <p:column  style="width: 10% ; text-align: center" >
+                            <p:commandButton value="Download" action="#{hoibaoManagedBean.downloadbiennhan(item)}" ajax="false" style="float: left" disabled="#{item.disimage}"/>
+                        </p:column>
+                    </p:dataTable>
+                    <div  >
+                      <p:confirmDialog global="false"  id="confirmDL2" message="#{hoibaoManagedBean.vwKieuhoiListDetail.manguoinhan}"
+                                     header="Thông tin chi tiết :" 
+                                     severity="alert" widgetVar="showhinhBiennhan" 
+                                     style="float: left;"
+                                     >
+                
+
+
+                    </p:confirmDialog>
+                        
+                    </div>
+                   
+                </div>
+            </h:form>
+        </div>
+        
+        <script src="showimage.js" type="text/javascript"></script>
+ 
+    </ui:define>
+</ui:composition> 
+

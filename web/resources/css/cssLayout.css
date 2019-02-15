@@ -1,0 +1,159 @@
+
+#top {
+    position: relative;
+    background-color: #036fab;
+    color: white;
+    padding: 5px;
+    margin: 0px 0px 10px 0px;
+}
+
+#bottom {
+    position: relative;
+    background-color: #c2dfef;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+#left {
+    float: left;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+#right {
+    float: right;
+    background-color: #ece3a5;
+    padding: 5px;
+    width: 150px;
+}
+
+.center_content {
+    position: relative;
+    background-color: #dddddd;
+    padding: 5px;
+}
+
+.left_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin-left: 170px;
+}
+
+.right_content {
+    background-color: #dddddd;
+    padding: 5px;
+    margin: 0px 170px 0px 170px;
+}
+
+#top a:link, #top a:visited {
+  color: white;
+  font-weight : bold;
+  text-decoration: none;
+}
+
+#top a:link:hover, #top a:visited:hover  {
+  color: black;
+  font-weight : bold;
+  text-decoration : underline;
+}
+
+#linktext {
+    position: relative;
+    background-color: red;
+    padding: 5px;
+    margin: 10px 0px 0px 0px;
+}
+
+.button-nomal-red {
+  
+    margin-left: 5px;
+    color: white;
+    padding: 2px;
+    height: 30px;
+    width:250px;
+    text-align: center;
+    font-size: larger;
+    background-color: red;
+    
+  
+}
+
+.button-nomal-blue {
+  
+    margin-left: 5px;
+    color: black;
+    padding: 2px;
+    height: 30px;
+    width:250px;
+    text-align: center;
+ 
+    
+  
+}
+
+.input-text-nomal{
+    margin-right: 5px;
+    width: 350px;
+    padding: 2px;
+ 
+    display: inline-block;
+ 
+    box-sizing: border-box;
+    margin-left: 5px;
+    font-size: medium
+}
+
+.input-checklist-nomal{
+    margin-right: 5px;
+    width: 400px;
+    padding: 2px;
+   
+    display: inline-block;
+   
+    box-sizing: border-box;
+    margin-left: 5px;
+    font-size: medium
+}
+
+.calendarClass input {
+    margin-right: 5px;
+    width: 400px;
+    padding: 2px;
+    
+    display: inline-block;
+    
+    box-sizing: border-box;
+    margin-left: 5px;
+    font-size: medium
+}
+
+.checklistClass {
+ 
+    width: 400px !important;
+ 
+      box-sizing: border-box;
+ 
+}
+
+.label-nomal {
+ 
+    color: black;
+    padding: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    text-align: left;
+    font-size: medium;
+}
+
+#loading {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(179, 179, 179, 0.39);
+    z-index:9999;
+    
+}
+

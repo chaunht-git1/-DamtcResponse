@@ -1,0 +1,56 @@
+.box{
+    margin-top: 0px;
+    padding:   0 2px 0 2px;
+    
+}
+
+.boxdiv{
+    margin-top: 0px;
+    padding:   0 2px 0 2px;
+    margin-bottom: 0px;
+}
+
+
+.tieudenho{
+    
+    font-size: medium;
+    color: blue;
+}
+
+.noidung{
+    
+    color: blue;
+    
+}
+
+.noidung_imp{
+    background: yellow;
+    color: black;
+    
+}
+
+.wellcustom {
+  min-height: 10px;
+  padding: 8px;
+  margin-bottom: 5px;
+ 
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+ 
+}
+
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background:url('resources\images\page-loader.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+.error{
+    
+    color: red;
+    
+}

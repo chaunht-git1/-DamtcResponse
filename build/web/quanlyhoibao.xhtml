@@ -1,0 +1,129 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"  
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:f="http://java.sun.com/jsf/core"  
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui" 
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+                template="/templates/default/main.xhtml">
+    <ui:define name="content">     
+
+        <div id="loading" style="position: fixed;top:0;left:0;width:100%;height:100%;background: rgba(179, 179, 179, 0.39);z-index:9999;display:none;">
+            <div style="position: fixed;top: 50%;left: 50%;width: 120px;height: 80px;background: #fff;margin-left: -50px;margin-top: -50px;text-align: center;border: 1px solid #c3c1c1;">
+                <img src="resources/images/page-loader.gif" alt=""/>
+                <div>Đang xử lý...</div>                         
+            </div>
+        </div>
+
+
+        <div  class="row col-lg-12" >
+            <h:form>
+                <div class="form-group">
+                    <p:messages id="messages" showSummary="false" showDetail="true" autoUpdate="true" closable="true" />
+                </div>
+                
+                <div class="form-group well well-sm">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1" style="width: 150px">Ngày biên nhận:</span>
+                            <p:calendar style="width: 600px" id="ngaybiennhan" value="#{hoibaoManagedBean.ngaybiennhan}" navigator="true" yearRange="-100:+0" pattern="dd/MM/yyyy"/>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1" style="width: 150px">Trạng thái:</span>
+                            <h:selectOneMenu  class="dropdown form-control " id="trangthai" value="#{hoibaoManagedBean.trangthai}" required="true" requiredMessage="Vui lòng chọn trạng thái hồi báo" >                     
+                                <f:selectItem itemValue="YT" itemLabel="Đã chi trả" />
+                                <f:selectItem itemValue="NN" itemLabel="Tồn đọng" />
+                            </h:selectOneMenu>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon" id="basic-addon1" style="width: 150px">Đại lý:</span>
+                            <h:selectOneMenu class="dropdown form-control " disabled="#{hoibaoManagedBean.dischondaily}" id="daily" value="#{hoibaoManagedBean.iddaily}" required="true" requiredMessage="Vui lòng chọn đại lý hồi báo" >                     
+                                <f:selectItem itemValue="alldl" itemLabel="Tất cả" />
+                                <f:selectItems  var="daily" value="#{hoibaoManagedBean.smtbDanhmucListModels}"  itemValue="#{daily.id}" itemLabel="#{daily.description}" />
+                            </h:selectOneMenu>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <h:commandLink action="#{hoibaoManagedBean.hienthithongtinmaster()}"
+                                       class="btn-primary btn-sm "
+                                       styleClass="btn btn-default "
+                                       >
+                            <i class="glyphicon glyphicon-search"></i>
+                            Tìm kiếm
+
+                        </h:commandLink>
+                    </div>
+
+                </div>                
+            </h:form>
+        </div>
+
+        <div class="row col-lg-12">
+            <h:form>
+                <div  class="well well-sm" >
+
+                    <p:dataTable id="showdata" binding="#{table}" value="#{hoibaoManagedBean.vwKieuhoiListMasters}" var="item" paginator="true"    paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rows="10">
+                        <p:column style="width: 3% ; text-align: center" >
+                            <f:facet name="header">
+                                <h:outputText value="Stt"/>
+                            </f:facet>
+                            <p:outputLabel value="#{table.rowIndex+1}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đối tác"/>
+                            </f:facet>
+                            #{item.doitacname}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đại lý"/>
+                            </f:facet>
+                            #{item.agent}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Ngày biên nhận"/>
+                            </f:facet>
+                            #{item.ngaybiennhan}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Đã chi trả"/>
+                            </f:facet>
+                            #{item.dachitra}
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Số hồ sơ"/>
+                            </f:facet>
+                            #{item.shs}
+                        </p:column>
+                        <p:column>
+                            <p:commandLink action="#{hoibaoManagedBean.chuyentranghoibao()}" onclick="doSubmit();">
+                                <h:graphicImage name="/images/detail.png" width="40" height="40"/>
+                                <f:setPropertyActionListener value="#{item}" target="#{hoibaoManagedBean.vwKieuhoiListMaster}"/>
+                            </p:commandLink>
+                        </p:column>
+                        <p:column  >
+                            <p:commandLink action="#{hoibaoManagedBean.showhoibao(item)}" disabled="true" >
+                                <h:graphicImage name="/images/download.png" width="40" height="40"/>
+                            </p:commandLink>                       
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </h:form>
+        </div>
+        <script src="scriptloading.js" type="text/javascript"></script>
+    </ui:define>
+</ui:composition> 
+
